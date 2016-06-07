@@ -1,0 +1,11 @@
+<div ng-controller='showController'>
+	<center>
+		<h4>
+			Words:
+		</h4>
+	</center>
+		<div class="word" ng-repeat="word in words | orderBy:'time'" ng-class-odd="'odd'" ng-class-even="'even'">
+			<p>{{word.english_word}} - {{word.hebrew_word}}</p>
+			<small class="pull-right">{{word.time | date:"h:mma 'on' MMM d, y"}}</small>
+		</div>
+</div>

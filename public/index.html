@@ -11,24 +11,18 @@
 	<script src='js/index.js'></script>
 </head>
 <body ng-app='wordLearning' class="col-md-offset-2 col-md-8">
-	<!--<div ng-view></div>-->
-	<!--
-	<div ng-controller='addController'>
-		<form class="form-auth" ng-submit="addWord()">
-			<h2>Add word:</h2>
-			<p class="text-warning">{{error_message}}</p>
-			English word: <input type="text" ng-model="word.english_word" placeholder="English word" class="form-control"><br>
-			Hebrew word: <input type="text" ng-model="word.hebrew_word" placeholder="Hebrew word" class="form-control"><br>
-			<input type="submit" value="Add word" class="btn btn-primary" />
-		</form>
-	</div>
-	-->
-	<div ng-controller='showController'>
-		<h4>Words:</h4>
-			<div class="word" ng-repeat="word in words | orderBy:'time'" ng-class-odd="'odd'" ng-class-even="'even'">
-				<p>{{word.english_word}} - {{word.hebrew_word}}</p>
-				<small class="pull-right">{{post.time | date:"h:mma 'on' MMM d, y"}}</small>
+
+	<div id='main' class="container">
+		<nav class="navbar-fluid navbar-default navbar-fixed-top">
+			<div class="container">
+				<a class="navbar-brand" href="#/"> Word Learning </a>
+				<p class="navbar-text"> English word learning plugin</p>
+				<p class="navbar-right navbar-text"><a href="#/add">Add</a> or <a href="#/test">Test</a></p>
 			</div>
+		</nav>
+	</div>
+
+	<div ng-view>
 	</div>
 </body>
 </html>

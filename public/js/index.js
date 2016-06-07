@@ -1,28 +1,23 @@
-var app = angular.module('wordLearning', []);
+var app = angular.module('wordLearning', ['ngRoute']);
 
-/*
 app.config(function($routeProvider){
 	$routeProvider
-	.when("/", {
+	.when('/', {
 		templateUrl: 'show.html',
-		controller: 'showController'
+		controller: 'showController'	
 	})
-	.when("/test" , {
+	.when('/add', {
+		templateUrl: 'add.html',
+		controller: 'addController'
+	})
+	.when('/test', {
 		templateUrl: 'test.html',
 		controller: 'testController'
 	})
-	.when("/add" , {
-		templateUrl: 'add.html',
-		controller: 'addController'
-	});
 });
-*/
 
 app.controller('showController', function($scope){
 	$scope.words = [];
-	$scope.word = {english_word: '1', hebrew_word: '2', time: '3'};
-	$scope.words.push($scope.word);
-
 });
 
 app.controller('addController', function($scope){
@@ -43,6 +38,6 @@ app.controller('addController', function($scope){
 	};
 });
 
-app.controller('testController', function($scope){
-
-});
+app.conteoller('testController', function($scope){
+	//Do This
+});	
