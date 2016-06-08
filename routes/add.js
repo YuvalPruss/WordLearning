@@ -3,13 +3,20 @@ var router = express.Router();
 
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
-  host     : '52.34.54.111',
+  host     : 'localhost',
   user     : 'root',
   password : 'Password1',
-  database: ''
+  database: 'words'
 });
 
-connection.connect();
+try
+{
+	connection.connect();
+}
+catch(err)
+{
+	console.log(err);
+}
 
 //Function to allow requests
 preCheck = function(req, res, next){
@@ -26,16 +33,20 @@ router.route('/')
 		var english_word = req.body.english_word;
 		var hebrew_word = req.body.hebrew_word;
 		var time = req.body.time;
+		
+		var success = req.body;
 
-		connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
-			if(err)
+		connection.query('insert into words (hebrew_word, english_word, created_at) values (' + english_word + ', ' + hebrew_word + ', current_timestamp)',
+			function(err)
 			{
-				throw err;
-			} 
-			console.log('The solution is: ', rows[0].solution);
-		});
+				if(err)
+				{
+					throw err;
+					success = 'error';
+				} 
+			});
 
-		return res.send(req.body);
+		return res.send(error);
 	})
 	//Get words
 	.get(function(req, res){

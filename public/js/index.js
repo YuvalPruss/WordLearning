@@ -38,14 +38,14 @@ app.controller('addController', function($scope, $http, $rootScope, $location){
 
 		$http.post('/add', $scope.word).success(function(data){
 			console.log(data);
-			if(data.success == 'success')
+			if(data == 'success')
 			{
 				$scope.error_message = "Inserted Successfully";
 				$scope.word = {english_word: '', hebrew_word: '', time: ''};
 			}
 			else
 			{
-				$scope.error_message = data.message;
+				$scope.error_message = data;
 			}
 		});
 
