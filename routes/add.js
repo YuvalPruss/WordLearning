@@ -1,23 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
-var mysql      = require('mysql');
-var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'root',
-  password : 'Password1',
-  database: 'words',
-  charset: "utf8_general_ci"
-});
+var db = require('./../models/db');
 
-try
-{
-	connection.connect();
-}
-catch(err)
-{
-	console.log(err);
-}
+var mydb = new DBHandler();
 
 //Function to allow requests
 preCheck = function(req, res, next){
@@ -37,7 +23,7 @@ router.route('/')
 		
 		var success = req.body;
 
-		connection.query("insert into words (hebrew_word, english_word, created_at) values ('" + hebrew_word + "', '" + english_word + "', current_timestamp)",
+		mydb.connection.query("insert into words (hebrew_word, english_word, created_at) values ('" + hebrew_word + "', '" + english_word + "', current_timestamp)",
 			function(err)
 			{
 				if(err)

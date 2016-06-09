@@ -1,36 +1,21 @@
 var express = require('express');
 var router = express.Router();
 
-var mysql      = require('mysql');
-var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'root',
-  password : 'Password1',
-  database: 'words',
-  charset: "utf8_general_ci"
-});
+var db = require('./../models/db');
 
-try
-{
-	connection.connect();
-}
-catch(err)
-{
-	console.log(err);
-}
+var mydb = new DBHandler();
+
+mydb.connect();
 
 router.route('/')
-	//Insert a word
 	.get(function(req, res){
-		connection.query("select * from words",
-			function(err,rows)
+		mydb.connection.query("select * from words", function(err,rows) {
+			if(err)
 			{
-				if(err)
-				{
-					throw err;
-				}
-				return res.send(rows);
-			});
+				throw err;
+			}
+			return res.send(rows);
+		});
 	});
 
 module.exports = router;
