@@ -18,8 +18,19 @@ app.config(function($routeProvider){
 	})
 });
 
-app.controller('showController', function($scope){
+app.controller('showController', function($scope, $http, $rootScope, $location){
 	$scope.words = [];
+	$http.get('/show').success(function(data){
+		if (data != "error")
+		{
+			for(var x = 0; x< data.length; x++)
+			{
+				$scope.words.push(data[x]);
+				console.log(data[x]);			
+			}
+			$scope.words;
+		}		
+	});
 });
 
 app.controller('addController', function($scope, $http, $rootScope, $location){
@@ -37,10 +48,10 @@ app.controller('addController', function($scope, $http, $rootScope, $location){
 		$scope.words.push($scope.word);
 
 		$http.post('/add', $scope.word).success(function(data){
-			console.log(data);
-			if(data == 'success')
+			if(data.hebrew_word != undefined)
 			{
 				$scope.error_message = "Inserted Successfully";
+				console.log("Word added:\n Hebrew: " + data.hebrew_word + "\nEnglish: " + data.english_word);
 				$scope.word = {english_word: '', hebrew_word: '', time: ''};
 			}
 			else
@@ -49,10 +60,39 @@ app.controller('addController', function($scope, $http, $rootScope, $location){
 			}
 		});
 
-		//console.log("Succssesfully Added Word!");
 	};
 });
 
-app.conteoller('testController', function($scope){
-	//Do This
+app.controller('testController', function($scope, $http, $rootScope, $location){
+	$scope.words = [];
+	$http.get('/show').success(function(data){
+		if (data != "error")
+		{
+			for(var x = 0; x< data.length; x++)
+			{
+				word = {
+					id: data[x].id,
+					english_word: data[x].english_word,
+					hebrew_word: ""
+				};
+				console.log(word);			
+				$scope.words.push(word);
+			}
+			$scope.words;
+		}		
+	});
+
+	$scope.check = function(word){
+		console.log(word);
+		$http.post('/test', word).success(function(data){
+			if(data)
+			{
+				word.status = 'True';
+			}
+			else
+			{
+				word.status = 'False';
+			}
+		});
+	};
 });	

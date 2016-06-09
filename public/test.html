@@ -1,0 +1,12 @@
+<div ng-controller='testController'>
+	<center>
+		<h4>
+			Test Me:
+		</h4>
+	</center>
+		<div class="word" ng-repeat="word in words | orderBy:'time'" ng-class-odd="'odd'" ng-class-even="'even'">
+			<p>{{word.english_word}} - <input type='text' ng-model='word.hebrew_word' placeholder='English word' class='form-control'></p>
+			<button type="check" value="Check" class="btn btn-primary" ng-click="check(word)">check</button>
+			<div ng-class="word.status">{{word.status}}</div>
+		</div>
+</div>

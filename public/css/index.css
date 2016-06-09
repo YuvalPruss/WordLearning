@@ -23,6 +23,19 @@ a {
 	cursor: default;
 }
 
+.True {
+	color: rgb(0,190,0);
+	display: inline-block;
+	float: right;
+	margin-right: 15px;
+}
+.False {
+	color: rgb(190,0,0);
+	display: inline-block;
+	float: right;
+	margin-right: 15px;
+}
+
 .odd {
 	background-color: #f2f9ff;
 	
@@ -36,3 +49,4 @@ a {
 	padding: 5px;
 	margin: 0 auto;
 }
+

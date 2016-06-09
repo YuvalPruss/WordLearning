@@ -6,7 +6,8 @@ var connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
   password : 'Password1',
-  database: 'words'
+  database: 'words',
+  charset: "utf8_general_ci"
 });
 
 try
@@ -36,7 +37,7 @@ router.route('/')
 		
 		var success = req.body;
 
-		connection.query('insert into words (hebrew_word, english_word, created_at) values (' + english_word + ', ' + hebrew_word + ', current_timestamp)',
+		connection.query("insert into words (hebrew_word, english_word, created_at) values ('" + hebrew_word + "', '" + english_word + "', current_timestamp)",
 			function(err)
 			{
 				if(err)
@@ -46,7 +47,7 @@ router.route('/')
 				} 
 			});
 
-		return res.send(error);
+		return res.send(success);
 	})
 	//Get words
 	.get(function(req, res){
